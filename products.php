@@ -1,14 +1,29 @@
 <?php
-$products = [
-    ["name" => "T-shirt", "price" => 20],
-    ["name" => "Shoes", "price" => 50],
-    ["name" => "Hat", "price" => 15]
-];
+
+$url = "https://dummyjson.com/products";
+
+$json = file_get_contents($url);
+
+$data = json_decode($json, true);
+
+$products = $data['products'];
+
 ?>
 
 <h1>Our Products</h1>
+
 <ul>
-    <?php foreach ($products as $product): ?>
-        <li><?php echo $product["name"]; ?> - $<?php echo $product["price"]; ?></li>
-    <?php endforeach; ?>
-</ul>
+
+<?php foreach ($products as $product): ?>
+
+    <li>
+
+    <a href="product.php?id=<?php echo $product['id']; ?>">
+
+        <?php echo $product['title']; ?>
+
+    </a>
+
+    - <?php echo $product['price']; ?> $
+
+</li>
